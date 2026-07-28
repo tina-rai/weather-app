@@ -113,3 +113,12 @@ button:hover {
 
     font-size: 18px;
 }
+
+#weather-icon {
+    width: 100px;
+    height: 100px;
+
+    margin: 10px auto;
+
+    display: block;
+}

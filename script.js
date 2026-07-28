@@ -4,6 +4,7 @@ const form = document.getElementById("weather-form");
 const cityInput = document.getElementById("city-input");
 
 const cityName = document.getElementById("city-name");
+const weatherIcon = document.getElementById("weather-icon");
 const temperature = document.getElementById("temperature");
 const description = document.getElementById("description");
 const feelsLike = document.getElementById("feels-like");
@@ -34,11 +35,16 @@ async function getWeather(city) {
 
         const response = await fetch(url);
 
+        console.log(response);
+
+        const data = await response.json();
+
+        console.log(data);
+
         if (!response.ok) {
             throw new Error("City not found.");
         }
 
-        const data = await response.json();
 
         displayWeather(data);
 
@@ -70,4 +76,10 @@ function displayWeather(data) {
     wind.textContent =
         `${data.wind.speed} m/s`;
 
+    const iconCode = data.weather[0].icon;
+
+    weatherIcon.src =
+        `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+    weatherIcon.hidden = false;
 }
