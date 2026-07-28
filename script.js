@@ -1,3 +1,5 @@
+const API_KEY = "3ca483827fc892e57178e22dfd561fe0";
+
 const form = document.getElementById("weather-form");
 const cityInput = document.getElementById("city-input");
 
@@ -8,22 +10,64 @@ const feelsLike = document.getElementById("feels-like");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const city = cityInput.value.trim();
 
     if (city === "") {
-        alert("Please enter a city name.");
+        alert("Please enter a city.");
         return;
     }
 
-    cityName.textContent = city;
-    temperature.textContent = "25°C";
-    description.textContent = "Sunny";
-    feelsLike.textContent = "27°C";
-    humidity.textContent = "60%";
-    wind.textContent = "10 km/h";
+    await getWeather(city);
 
     cityInput.value = "";
 });
+
+async function getWeather(city) {
+
+    const url =
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
+
+    try {
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("City not found.");
+        }
+
+        const data = await response.json();
+
+        displayWeather(data);
+
+    }
+    catch (error) {
+
+        alert(error.message);
+
+    }
+
+}
+
+function displayWeather(data) {
+
+    cityName.textContent = data.name;
+
+    temperature.textContent =
+        `${Math.round(data.main.temp)}°C`;
+
+    description.textContent =
+        data.weather[0].description;
+
+    feelsLike.textContent =
+        `${Math.round(data.main.feels_like)}°C`;
+
+    humidity.textContent =
+        `${data.main.humidity}%`;
+
+    wind.textContent =
+        `${data.wind.speed} m/s`;
+
+}
