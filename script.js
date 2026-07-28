@@ -11,6 +11,12 @@ const feelsLike = document.getElementById("feels-like");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 
+const searchButton = document.getElementById("search-btn");
+
+const loading = document.getElementById("loading");
+
+const errorMessage = document.getElementById("error-message");
+
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -26,38 +32,79 @@ form.addEventListener("submit", async function (event) {
     cityInput.value = "";
 });
 
-async function getWeather(city) {
+function showLoading(){
 
-    const url =
+    loading.hidden=false;
+
+    searchButton.disabled=true;
+
+    errorMessage.textContent="";
+}
+
+function hideLoading(){
+
+    loading.hidden=true;
+
+    searchButton.disabled=false;
+}
+
+function showError(message){
+
+    errorMessage.textContent=message;
+
+    cityName.textContent="City";
+
+    temperature.textContent="--°C";
+
+    description.textContent="Weather description";
+
+    feelsLike.textContent="--°C";
+
+    humidity.textContent="--%";
+
+    wind.textContent="-- km/h";
+
+    weatherIcon.hidden=true;
+}
+
+async function getWeather(city){
+
+    showLoading();
+
+    const url=
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`;
 
-    try {
+    try{
 
-        const response = await fetch(url);
+        const response=await fetch(url);
 
-        console.log(response);
+        const data=await response.json();
 
-        const data = await response.json();
+        if(!response.ok){
 
-        console.log(data);
-
-        if (!response.ok) {
             throw new Error("City not found.");
-        }
 
+        }
 
         displayWeather(data);
 
     }
-    catch (error) {
+    catch(error){
 
-        alert(error.message);
+        showError(error.message);
+
+    }
+    finally{
+
+        hideLoading();
 
     }
 
 }
 
 function displayWeather(data) {
+
+    errorMessage.textContent="";
 
     cityName.textContent = data.name;
 

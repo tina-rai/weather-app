@@ -23,12 +23,18 @@
                 placeholder="Enter city..."
                 autocomplete="off"
             >
-
-            <button type="submit">
+        
+            <button id="search-btn" type="submit">
                 Search
             </button>
-
+        
         </form>
+
+        <p id="loading" hidden>
+            Loading weather...
+        </p>
+        
+        <p id="error-message"></p>
 
         <section id="weather-card">
             <h2 id="city-name">City</h2>
