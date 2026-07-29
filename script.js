@@ -17,6 +17,11 @@ const loading = document.getElementById("loading");
 
 const errorMessage = document.getElementById("error-message");
 
+const locationButton =
+document.getElementById("location-btn");
+
+locationButton.addEventListener("click", getCurrentLocation);
+
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -27,8 +32,13 @@ form.addEventListener("submit", async function (event) {
         return;
     }
 
+    temperature.textContent = "Loading...";
+    description.textContent = "";
+    feelsLike.textContent = "--°C";
+    humidity.textContent = "--%";
+    wind.textContent = "-- km/h";
+    
     await getWeather(city);
-
     cityInput.value = "";
 });
 
@@ -128,5 +138,47 @@ function displayWeather(data) {
     weatherIcon.src =
         `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
+     weatherIcon.alt =
+     data.weather[0].description;
+
     weatherIcon.hidden = false;
+}
+
+function getCurrentLocation() {
+
+    if (!navigator.geolocation) {
+
+        alert("Geolocation is not supported.");
+
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        success,
+        error
+    );
+
+}
+
+async function success(position) {
+
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    const url =
+`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    displayWeather(data);
+
+}
+
+function error() {
+
+    alert("Unable to retrieve location.");
+
 }
