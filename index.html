@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang ="en">
 <head>
-    <meta charset="UTF-8"
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
 
@@ -17,23 +17,26 @@
 
         <form id="weather-form">
 
-            <input
-                type="text"
-                id="city-input"
-                placeholder="Enter city..."
-                autocomplete="off"
-            >
+            <div class="search-row">
         
-            <button id="search-btn" type="submit">
-                Search
-            </button>
-
+                <input
+                    type="text"
+                    id="city-input"
+                    placeholder="Enter city..."
+                    autocomplete="off"
+                >
+        
+                <button id="search-btn" type="submit">
+                    Search
+                </button>
+        
+            </div>
+        
             <button id="location-btn" type="button">
-                Use My Location
+                📍 Use My Location
             </button>
         
         </form>
-
         <p id="loading" hidden>
             Loading weather...
         </p>
