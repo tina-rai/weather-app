@@ -10,6 +10,8 @@ const description = document.getElementById("description");
 const feelsLike = document.getElementById("feels-like");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
+const tempMin = document.getElementById("temp-min");
+const tempMax = document.getElementById("temp-max");
 
 const searchButton = document.getElementById("search-btn");
 
@@ -75,6 +77,8 @@ function showError(message){
     wind.textContent="-- km/h";
 
     weatherIcon.hidden=true;
+    tempMin.textContent="--°C";
+    tempMax.textContent="--°C";
 }
 
 async function getWeather(city){
@@ -120,6 +124,12 @@ function displayWeather(data) {
 
     temperature.textContent =
         `${Math.round(data.main.temp)}°C`;
+
+    tempMin.textContent =
+       `${Math.round(data.main.temp_min)}°C`;
+
+    tempMax.textContent =
+      `${Math.round(data.main.temp_max)}°C`;
 
     description.textContent =
         data.weather[0].description;

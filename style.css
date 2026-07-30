@@ -176,3 +176,12 @@ button:disabled{
     }
 
 }
+#temperature{
+    margin-bottom:8px;
+}
+
+.temp-range{
+    color:#666;
+    margin-bottom:18px;
+    font-size:15px;
+}
