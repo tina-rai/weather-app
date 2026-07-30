@@ -12,6 +12,7 @@ const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const tempMin = document.getElementById("temp-min");
 const tempMax = document.getElementById("temp-max");
+const visibility = document.getElementById("visibility");
 
 const searchButton = document.getElementById("search-btn");
 
@@ -79,6 +80,7 @@ function showError(message){
     weatherIcon.hidden=true;
     tempMin.textContent="--°C";
     tempMax.textContent="--°C";
+    visibility.textContent = "-- km";
 }
 
 async function getWeather(city){
@@ -139,6 +141,8 @@ function displayWeather(data) {
 
     humidity.textContent =
         `${data.main.humidity}%`;
+        visibility.textContent =
+`${(data.visibility / 1000).toFixed(1)} km`;
 
     wind.textContent =
         `${data.wind.speed} m/s`;
