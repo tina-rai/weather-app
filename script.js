@@ -261,6 +261,7 @@ updateBackground(
 );
 
 currentCity = data.name;
+saveHistory(data.name);
 }
 
 function getCurrentLocation() {
@@ -403,3 +404,37 @@ Math.round((day.pop || 0)*100);
     });
 
 }
+const historyList = document.getElementById("history-list");
+
+function getHistory() {
+    return JSON.parse(localStorage.getItem("history")) || [];
+}
+
+function saveHistory(city) {
+    let history = getHistory().filter(item => item !== city);
+
+    history.unshift(city);
+
+    history = history.slice(0, 5);
+
+    localStorage.setItem("history", JSON.stringify(history));
+
+    renderHistory();
+}
+
+function renderHistory() {
+    historyList.innerHTML = "";
+
+    getHistory().forEach(city => {
+        const li = document.createElement("li");
+        li.textContent = city;
+
+        li.addEventListener("click", () => {
+            getWeather(city);
+        });
+
+        historyList.appendChild(li);
+    });
+}
+
+renderHistory();

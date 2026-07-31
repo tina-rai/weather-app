@@ -311,3 +311,26 @@ body {
     cursor: pointer;
     font-size: 14px;
 }
+#history {
+    margin-top: 35px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+#history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#history-list li {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f5f7fb;
+}
+
+#history-list li:hover {
+    background: #e3f2fd;
+}
