@@ -13,6 +13,8 @@ const wind = document.getElementById("wind");
 const tempMin = document.getElementById("temp-min");
 const tempMax = document.getElementById("temp-max");
 const visibility = document.getElementById("visibility");
+const sunrise = document.getElementById("sunrise");
+const sunset = document.getElementById("sunset");
 
 const searchButton = document.getElementById("search-btn");
 
@@ -117,6 +119,17 @@ async function getWeather(city){
     }
 
 }
+//helper function
+function formatTime(unixTime) {
+
+    const date = new Date(unixTime * 1000);
+
+    return date.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+
+}
 
 function displayWeather(data) {
 
@@ -156,6 +169,12 @@ function displayWeather(data) {
      data.weather[0].description;
 
     weatherIcon.hidden = false;
+
+    sunrise.textContent =
+    formatTime(data.sys.sunrise);
+
+    sunset.textContent =
+formatTime(data.sys.sunset);
 }
 
 function getCurrentLocation() {
