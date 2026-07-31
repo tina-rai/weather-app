@@ -16,6 +16,7 @@ const visibility = document.getElementById("visibility");
 const sunrise = document.getElementById("sunrise");
 const sunset = document.getElementById("sunset");
 const lastUpdated = document.getElementById("last-updated");
+const forecastContainer = document.getElementById("forecast-container");
 
 const searchButton = document.getElementById("search-btn");
 
@@ -109,6 +110,8 @@ async function getWeather(city){
         }
 
         displayWeather(data);
+
+        await getForecast(city);
 
     }
     catch(error){
@@ -280,5 +283,60 @@ function updateBackground(condition) {
         document.body.style.background = "#e8f4ff";
 
     }
+
+}
+async function getForecast(city){
+
+    const url =
+`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${API_KEY}`;
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    displayForecast(data);
+
+}
+
+function displayForecast(data){
+
+    forecastContainer.innerHTML = "";
+
+    const dailyForecast = data.list.filter(item =>
+        item.dt_txt.includes("12:00:00")
+    );
+
+    dailyForecast.forEach(day=>{
+
+        const date = new Date(day.dt_txt);
+
+        const weekday =
+date.toLocaleDateString([],{
+            weekday:"short"
+        });
+
+        const icon =
+`https://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
+
+        const rain =
+Math.round((day.pop || 0)*100);
+
+        forecastContainer.innerHTML += `
+
+        <div class="forecast-card">
+
+            <h3>${weekday}</h3>
+
+            <img src="${icon}">
+
+            <p>${Math.round(day.main.temp)}°C</p>
+
+            <p>🌧️ ${rain}%</p>
+
+        </div>
+
+        `;
+
+    });
 
 }

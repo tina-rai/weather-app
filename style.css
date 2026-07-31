@@ -190,3 +190,62 @@ button:disabled{
     font-size: 14px;
     color: #666;
 }
+#forecast{
+
+    margin-top:40px;
+
+    border-top:1px solid #ddd;
+
+    padding-top:25px;
+
+}
+
+#forecast h2{
+
+    margin-bottom:20px;
+
+}
+
+#forecast-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+
+    gap:15px;
+
+}
+
+.forecast-card{
+
+    background:#f5f7fb;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    text-align:center;
+
+    transition:0.3s;
+
+}
+
+.forecast-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.forecast-card img{
+
+    width:60px;
+
+}
+
+.forecast-card p{
+
+    margin:6px 0;
+
+    font-size:15px;
+
+}
