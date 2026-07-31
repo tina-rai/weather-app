@@ -185,3 +185,8 @@ button:disabled{
     margin-bottom:18px;
     font-size:15px;
 }
+#last-updated {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}

@@ -15,6 +15,7 @@ const tempMax = document.getElementById("temp-max");
 const visibility = document.getElementById("visibility");
 const sunrise = document.getElementById("sunrise");
 const sunset = document.getElementById("sunset");
+const lastUpdated = document.getElementById("last-updated");
 
 const searchButton = document.getElementById("search-btn");
 
@@ -83,6 +84,9 @@ function showError(message){
     tempMin.textContent="--°C";
     tempMax.textContent="--°C";
     visibility.textContent = "-- km";
+
+    lastUpdated.textContent = "Last Updated: --";
+    document.body.style.background = "#e8f4ff";
 }
 
 async function getWeather(city){
@@ -128,8 +132,17 @@ function formatTime(unixTime) {
         hour: "numeric",
         minute: "2-digit"
     });
-
 }
+
+function currentTime() {
+
+        return new Date().toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+    
+    }
 
 function displayWeather(data) {
 
@@ -174,7 +187,14 @@ function displayWeather(data) {
     formatTime(data.sys.sunrise);
 
     sunset.textContent =
-formatTime(data.sys.sunset);
+    formatTime(data.sys.sunset);
+
+    lastUpdated.textContent =
+`Last Updated: ${currentTime()}`;
+
+updateBackground(
+    data.weather[0].main
+);
 }
 
 function getCurrentLocation() {
@@ -213,5 +233,52 @@ async function success(position) {
 function error() {
 
     alert("Unable to retrieve location.");
+
+}
+
+function updateBackground(condition) {
+
+    condition = condition.toLowerCase();
+
+    if (condition.includes("clear")) {
+
+        document.body.style.background =
+        "linear-gradient(to bottom, #87CEEB, #FFD54F)";
+
+    }
+
+    else if (condition.includes("cloud")) {
+
+        document.body.style.background =
+        "linear-gradient(to bottom, #90A4AE, #CFD8DC)";
+
+    }
+
+    else if (condition.includes("rain")) {
+
+        document.body.style.background =
+        "linear-gradient(to bottom, #546E7A, #90A4AE)";
+
+    }
+
+    else if (condition.includes("snow")) {
+
+        document.body.style.background =
+        "linear-gradient(to bottom, #ECEFF1, #FFFFFF)";
+
+    }
+
+    else if (condition.includes("thunder")) {
+
+        document.body.style.background =
+        "linear-gradient(to bottom, #263238, #455A64)";
+
+    }
+
+    else {
+
+        document.body.style.background = "#e8f4ff";
+
+    }
 
 }
