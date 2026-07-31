@@ -47,6 +47,48 @@ themeToggle.addEventListener("click", () => {
         ? "☀️ Light Mode"
         : "🌙 Dark Mode";
 });
+const saveFavoriteButton = document.getElementById("save-favorite");
+const favoritesContainer = document.getElementById("favorites-container");
+
+let currentCity = "";
+
+function getFavorites() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
+function saveFavorites(cities) {
+    localStorage.setItem("favorites", JSON.stringify(cities));
+}
+
+function renderFavorites() {
+    favoritesContainer.innerHTML = "";
+
+    getFavorites().forEach(city => {
+        const button = document.createElement("button");
+        button.className = "favorite-city";
+        button.textContent = city;
+
+        button.addEventListener("click", () => {
+            getWeather(city);
+        });
+
+        favoritesContainer.appendChild(button);
+    });
+}
+
+saveFavoriteButton.addEventListener("click", () => {
+    if (!currentCity) return;
+
+    const favorites = getFavorites();
+
+    if (!favorites.includes(currentCity)) {
+        favorites.push(currentCity);
+        saveFavorites(favorites);
+        renderFavorites();
+    }
+});
+
+renderFavorites();
 
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -217,6 +259,8 @@ function displayWeather(data) {
 updateBackground(
     data.weather[0].main
 );
+
+currentCity = data.name;
 }
 
 function getCurrentLocation() {
