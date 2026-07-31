@@ -262,6 +262,11 @@ updateBackground(
 
 currentCity = data.name;
 saveHistory(data.name);
+
+currentTempCelsius = data.main.temp;
+
+temperature.textContent =
+    `${Math.round(currentTempCelsius)}°C`;
 }
 
 function getCurrentLocation() {
@@ -438,3 +443,25 @@ function renderHistory() {
 }
 
 renderHistory();
+
+const unitToggle = document.getElementById("unit-toggle");
+
+let isCelsius = true;
+let currentTempCelsius = null;
+
+unitToggle.addEventListener("click", () => {
+    if (currentTempCelsius === null) return;
+
+    isCelsius = !isCelsius;
+
+    if (isCelsius) {
+        temperature.textContent =
+            `${Math.round(currentTempCelsius)}°C`;
+        unitToggle.textContent = "°F";
+    } else {
+        const f = currentTempCelsius * 9 / 5 + 32;
+        temperature.textContent =
+            `${Math.round(f)}°F`;
+        unitToggle.textContent = "°C";
+    }
+});
