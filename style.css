@@ -350,3 +350,16 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.error-card {
+    background: #ffebee;
+    color: #b71c1c;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+}

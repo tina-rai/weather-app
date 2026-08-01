@@ -128,27 +128,26 @@ function hideLoading(){
 
 function showError(message){
 
-    errorMessage.textContent=message;
+    errorMessage.innerHTML = `
+        <div class="error-card">
+            <div class="error-icon">❌</div>
+            <p><strong>${message}</strong></p>
+            <p>Try another city name.</p>
+        </div>
+    `;
 
-    cityName.textContent="City";
-
-    temperature.textContent="--°C";
-
-    description.textContent="Weather description";
-
-    feelsLike.textContent="--°C";
-
-    humidity.textContent="--%";
-
-    wind.textContent="-- km/h";
-
-    weatherIcon.hidden=true;
-    tempMin.textContent="--°C";
-    tempMax.textContent="--°C";
+    cityName.textContent = "City";
+    temperature.textContent = "--°C";
+    description.textContent = "Weather description";
+    feelsLike.textContent = "--°C";
+    humidity.textContent = "--%";
     visibility.textContent = "-- km";
-
+    wind.textContent = "-- km/h";
+    sunrise.textContent = "--:--";
+    sunset.textContent = "--:--";
     lastUpdated.textContent = "Last Updated: --";
-    document.body.style.background = "#e8f4ff";
+
+    weatherIcon.hidden = true;
 }
 
 async function getWeather(city){
@@ -166,7 +165,7 @@ async function getWeather(city){
 
         if(!response.ok){
 
-            throw new Error("City not found.");
+            throw new Error("Oopsie! City not found.");
 
         }
 
