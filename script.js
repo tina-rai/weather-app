@@ -464,3 +464,15 @@ unitToggle.addEventListener("click", () => {
         unitToggle.textContent = "°C";
     }
 });
+
+document.addEventListener("keydown", (event) => {
+
+    if (
+        event.key === "/" &&
+        document.activeElement !== cityInput
+    ) {
+        event.preventDefault();
+        cityInput.focus();
+    }
+
+});
