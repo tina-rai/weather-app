@@ -363,3 +363,61 @@ body {
     font-size: 32px;
     margin-bottom: 8px;
 }
+
+/* =========================
+   Mobile Responsive Design
+   ========================= */
+
+   @media (max-width: 600px) {
+
+    body {
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    .container {
+        width: 100%;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .search-row {
+        flex-direction: column;
+    }
+
+    .search-row input,
+    .search-row button,
+    #location-btn {
+        width: 100%;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    #temperature {
+        font-size: 44px;
+    }
+
+    #weather-card p {
+        font-size: 16px;
+    }
+
+    #forecast-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-card {
+        padding: 12px;
+    }
+
+    .forecast-card img {
+        width: 50px;
+    }
+
+}
