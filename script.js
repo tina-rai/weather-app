@@ -222,8 +222,11 @@ function displayWeather(data) {
     tempMax.textContent =
       `${Math.round(data.main.temp_max)}°C`;
 
-    description.textContent =
-        data.weather[0].description;
+      description.textContent =
+      formatDescription(
+          data.weather[0].main,
+          data.weather[0].description
+      );
 
     feelsLike.textContent =
         `${Math.round(data.main.feels_like)}°C`;
@@ -234,8 +237,7 @@ function displayWeather(data) {
 `${(data.visibility / 1000).toFixed(1)} km`;
 
     wind.textContent =
-        `${data.wind.speed} m/s`;
-
+`${(data.wind.speed * 3.6).toFixed(1)} km/h`;
     const iconCode = data.weather[0].icon;
 
     weatherIcon.src =
@@ -266,6 +268,25 @@ currentTempCelsius = data.main.temp;
 
 temperature.textContent =
     `${Math.round(currentTempCelsius)}°C`;
+
+    console.log("A");
+
+currentCity = data.name;
+
+console.log("B");
+
+saveHistory(data.name);
+
+console.log("C");
+
+currentTempCelsius = data.main.temp;
+
+console.log("D");
+
+temperature.textContent =
+`${Math.round(currentTempCelsius)}°C`;
+
+console.log("E");
 }
 
 function getCurrentLocation() {
@@ -282,7 +303,7 @@ function getCurrentLocation() {
         success,
         error
     );
-
+ 
 }
 
 async function success(position) {
@@ -307,51 +328,50 @@ function error() {
 
 }
 
-function updateBackground(condition) {
+function updateBackground(condition){
 
     condition = condition.toLowerCase();
 
-    if (condition.includes("clear")) {
+    const themes = {
+
+        clear: "linear-gradient(135deg,#56CCF2,#2F80ED)",
+
+        clouds: "linear-gradient(135deg,#757F9A,#D7DDE8)",
+
+        rain: "linear-gradient(135deg,#314755,#26A0DA)",
+
+        drizzle: "linear-gradient(135deg,#5C7C8A,#9DB4C0)",
+
+        thunderstorm:"linear-gradient(135deg,#232526,#414345)",
+
+        snow:"linear-gradient(135deg,#E6DADA,#274046)",
+
+        mist:"linear-gradient(135deg,#606c88,#3f4c6b)",
+
+        haze:"linear-gradient(135deg,#bdc3c7,#2c3e50)",
+
+        fog:"linear-gradient(135deg,#485563,#29323c)",
+
+        smoke:"linear-gradient(135deg,#434343,#000000)",
+
+        dust:"linear-gradient(135deg,#C79081,#DFA579)",
+
+        sand:"linear-gradient(135deg,#C2B280,#E8D7A4)",
+
+        ash:"linear-gradient(135deg,#3E5151,#DECBA4)",
+
+        squall:"linear-gradient(135deg,#0F2027,#203A43)",
+
+        tornado:"linear-gradient(135deg,#232526,#000000)"
+
+    };
+
+    if (!document.body.classList.contains("dark")) {
 
         document.body.style.background =
-        "linear-gradient(to bottom, #87CEEB, #FFD54F)";
-
+            themes[condition] || "#e8f4ff";
+    
     }
-
-    else if (condition.includes("cloud")) {
-
-        document.body.style.background =
-        "linear-gradient(to bottom, #90A4AE, #CFD8DC)";
-
-    }
-
-    else if (condition.includes("rain")) {
-
-        document.body.style.background =
-        "linear-gradient(to bottom, #546E7A, #90A4AE)";
-
-    }
-
-    else if (condition.includes("snow")) {
-
-        document.body.style.background =
-        "linear-gradient(to bottom, #ECEFF1, #FFFFFF)";
-
-    }
-
-    else if (condition.includes("thunder")) {
-
-        document.body.style.background =
-        "linear-gradient(to bottom, #263238, #455A64)";
-
-    }
-
-    else {
-
-        document.body.style.background = "#e8f4ff";
-
-    }
-
 }
 async function getForecast(city){
 
@@ -499,5 +519,49 @@ Wind: ${wind.textContent}
         copyWeatherButton.textContent =
             "Copy Weather";
     }, 1500);
+
+});
+
+function formatDescription(weatherMain, description) {
+
+    const icons = {
+        Clear: "☀️",
+        Clouds: "☁️",
+        Rain: "🌧️",
+        Drizzle: "🌦️",
+        Thunderstorm: "⛈️",
+        Snow: "❄️",
+        Mist: "🌫️",
+        Fog: "🌁",
+        Haze: "🌤️"
+    };
+
+    return `${icons[weatherMain] || "🌍"} ${description}`;
+}
+const tabs =
+document.querySelectorAll(".tab-btn");
+
+const panels =
+document.querySelectorAll(".tab-panel");
+
+tabs.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        tabs.forEach(tab =>
+            tab.classList.remove("active")
+        );
+
+        panels.forEach(panel =>
+            panel.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        document
+            .getElementById(button.dataset.tab)
+            .classList.add("active");
+
+    });
 
 });

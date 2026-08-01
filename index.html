@@ -51,93 +51,140 @@
         <p id="error-message"></p>
 
         <section id="weather-card">
-            <h2 id="city-name">City</h2>
 
+            <h2 id="city-name">City</h2>
+        
             <img
                 id="weather-icon"
                 src=""
                 alt="Weather Icon"
                 hidden
             >
-            
+        
             <h3 id="temperature">--°C</h3>
-
+        
+            <p id="description">
+                Weather Description
+            </p>
+        
             <p class="temp-range">
-                Min:
+                Min
                 <span id="temp-min">--°C</span>
-                |
-                Max:
+        
+                •
+        
+                Max
                 <span id="temp-max">--°C</span>
             </p>
-
-            <p id="description">
-                Weather description
-            </p>
-
-            <p>
-                Feels Like:
-                <span id="feels-like">--°C</span>
-            </p>
-
-            <p>
-                Humidity:
-                <span id="humidity">--%</span>
-            </p>
-
-            <p>
-                Visibility:
-                <span id="visibility">-- km</span>
-            </p>
-
-            <p>
-                Wind:
-                <span id="wind">-- km/h</span>
-    
-            </p>
-            <p>
-                🌅 Sunrise:
-                <span id="sunrise">--:--</span>
-            </p>
-            
-            <p>
-                🌇 Sunset:
-                <span id="sunset">--:--</span>
-            </p>
+        
+            <div class="weather-details">
+        
+                <div class="detail-card">
+                    <span>🌡 Feels Like</span>
+                    <h3 id="feels-like">--°C</h3>
+                </div>
+        
+                <div class="detail-card">
+                    <span>💧 Humidity</span>
+                    <h3 id="humidity">--%</h3>
+                </div>
+        
+                <div class="detail-card">
+                    <span>💨 Wind</span>
+                    <h3 id="wind">-- km/h</h3>
+                </div>
+        
+                <div class="detail-card">
+                    <span>👁 Visibility</span>
+                    <h3 id="visibility">-- km</h3>
+                </div>
+        
+                <div class="detail-card">
+                    <span>🌅 Sunrise</span>
+                    <h3 id="sunrise">--:--</h3>
+                </div>
+        
+                <div class="detail-card">
+                    <span>🌇 Sunset</span>
+                    <h3 id="sunset">--:--</h3>
+                </div>
+        
+            </div>
+        
+            <div class="action-buttons">
+        
+                <button id="save-favorite">
+                    
+                    Save
+                </button>
+        
+                <button id="copy-weather">
+                     Copy Weather Details
+                </button>
+        
+            </div>
+        
             <p id="last-updated">
                 Last Updated: --
             </p>
+        
+        </section>
 
-            <button id="copy-weather" type="button">
-                 Copy Weather
+        <div class="tabs">
+
+            <button
+                class="tab-btn active"
+                data-tab="forecast"
+            >
+                Forecast
             </button>
-
-        </section>
-
-        <section id="forecast">
-
-            <h2>5-Day Forecast</h2>
         
-            <div id="forecast-container">
+            <button
+                class="tab-btn"
+                data-tab="favorites"
+            >
+                Favorites
+            </button>
         
-            </div>
+            <button
+                class="tab-btn"
+                data-tab="history"
+            >
+                History
+            </button>
         
-        </section>
-
-        <section id="favorites">
-            <h2> <3 Favorite Cities</h2>
+        </div>
         
-            <div class="favorite-actions">
-                <button id="save-favorite" type="button">
-                    Save Current City
-                </button>
-            </div>
+        <div class="tab-content">
         
-            <div id="favorites-container"></div>
-        </section>
-        <section id="history">
-            <h2>🕘 Recent Searches</h2>
-            <ul id="history-list"></ul>
-        </section>
+            <section
+                id="forecast"
+                class="tab-panel active"
+            >
+        
+                <div id="forecast-container"></div>
+        
+            </section>
+        
+            <section
+                id="favorites"
+                class="tab-panel"
+            >
+        
+                <div id="favorites-container"></div>
+        
+            </section>
+        
+            <section
+                id="history"
+                class="tab-panel"
+            >
+        
+                <ul id="history-list"></ul>
+        
+            </section>
+        
+        </div>
 
     </main>
 
