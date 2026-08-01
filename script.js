@@ -65,8 +65,10 @@ function renderFavorites() {
 
     getFavorites().forEach(city => {
         const button = document.createElement("button");
-        button.className = "favorite-city";
-        button.textContent = city;
+        button.className="favorite-city";
+
+        button.innerHTML=
+        `⭐ ${city}`;
 
         button.addEventListener("click", () => {
             getWeather(city);

@@ -13,11 +13,19 @@
     <!--main represents primary content of page, instead of div-->
     <main class="container">
 
-        <h1>🌦️ Weather Report</h1>
+        <div class="header">
 
-        <button id="theme-toggle" type="button">
-            🌙 Dark Mode
-        </button>
+            <div class="title-area">
+        
+                <h1>🌦 Weather</h1>
+        
+                <p class="subtitle">
+                    Live weather around the world
+                </p>
+        
+            </div>
+        
+        </div>
 
         <form id="weather-form">
 
@@ -36,21 +44,39 @@
         
             </div>
         
-            <button id="location-btn" type="button">
-                📍 Use My Location
-            </button>
-            <button id="unit-toggle" type="button">
-                °F
-            </button>
+            <div class="controls">
+
+                <button id="location-btn">
+            
+                    📍 Current Location
+            
+                </button>
+            
+                <button id="unit-toggle">
+            
+                    °F
+            
+                </button>
+
+
+    <button id="theme-toggle">
+        🌙 Dark Mode
+    </button>
+            
+            </div>
         
         </form>
         <div id="loading" hidden>
             <div class="spinner"></div>
-            <p>Loading weather...</p>
-        </div>
+                </div>
         <p id="error-message"></p>
 
         <section id="weather-card">
+            <div class="weather-main">
+
+                <div class="weather-left">
+            
+            
 
             <h2 id="city-name">City</h2>
         
@@ -125,9 +151,11 @@
             </div>
         
             <p id="last-updated">
-                Last Updated: --
+                Last Updated: 
             </p>
-        
+        </div>
+
+        <div class="weather-right">
         </section>
 
         <div class="tabs">
