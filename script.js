@@ -476,3 +476,28 @@ document.addEventListener("keydown", (event) => {
     }
 
 });
+
+const copyWeatherButton =
+document.getElementById("copy-weather");
+
+copyWeatherButton.addEventListener("click", async () => {
+
+    const text = `
+${cityName.textContent}
+${temperature.textContent}
+${description.textContent}
+Feels Like: ${feelsLike.textContent}
+Humidity: ${humidity.textContent}
+Wind: ${wind.textContent}
+`;
+
+    await navigator.clipboard.writeText(text.trim());
+
+    copyWeatherButton.textContent = "Copied!";
+
+    setTimeout(() => {
+        copyWeatherButton.textContent =
+            "Copy Weather";
+    }, 1500);
+
+});
