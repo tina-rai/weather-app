@@ -22,9 +22,10 @@ saveFavoriteButton.addEventListener("click", () => {
     }
 });
 
-
 form.addEventListener("submit", async function (event) {
     event.preventDefault();
+
+    console.log("Submit event fired");
 
     const city = cityInput.value.trim();
 
@@ -33,14 +34,7 @@ form.addEventListener("submit", async function (event) {
         return;
     }
 
-    temperature.textContent = "Loading...";
-    description.textContent = "";
-    feelsLike.textContent = "--°C";
-    humidity.textContent = "--%";
-    wind.textContent = "-- km/h";
-    
     await getWeather(city);
-    cityInput.value = "";
 });
 
 document.addEventListener("keydown", (event) => {
