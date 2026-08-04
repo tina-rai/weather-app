@@ -2,15 +2,21 @@
 
 A modern weather application built with **HTML, CSS, and JavaScript** that provides real-time weather information and a 5-day forecast using the OpenWeatherMap API.
 
+## Live Demo
+
+https://tina-rai.github.io/weather-app/
+
 ##  Preview
 
-> Add screenshots here after uploading them.
-
 ### Light Mode
-![Light Mode](images/w3.png)
+![Light Mode](images/light-mode.png)
 
 ### Dark Mode
-![Dark Mode](images/w4.png)
+![Dark Mode](images/dark-mode.png)
+
+### Mobile View
+
+![Mobile](images/mobile-view.jpeg)
 
 ---
 
@@ -19,7 +25,7 @@ A modern weather application built with **HTML, CSS, and JavaScript** that provi
 -   Search weather by city name
 - 📍 Get weather using your current location
 -   Real-time weather information
--   Temperature display
+-   Current temperature
 -   Feels Like temperature
 -   Humidity
 -   Wind Speed
@@ -33,7 +39,7 @@ A modern weather application built with **HTML, CSS, and JavaScript** that provi
 -   Recent search history
 -   Copy weather details to clipboard
 -   Celsius / Fahrenheit conversion
--   Fully responsive design
+-   Responsive UI design
 
 ---
 
@@ -54,6 +60,9 @@ A modern weather application built with **HTML, CSS, and JavaScript** that provi
 weather-app/
 │
 ├── images/
+│   ├── light-mode.png
+│   ├── dark-mode.png
+│   └── mobile-view.jpg
 │
 ├── js/
 │   ├── api.js
@@ -65,8 +74,8 @@ weather-app/
 │
 ├── index.html
 ├── style.css
-├── package.json
-└── README.md
+├── README.md
+└── package.json
 ```
 
 ---
@@ -87,21 +96,20 @@ Or run with VS Code Live Server.
 
 ---
 
-##  API
+## API
 
-This project uses the **OpenWeatherMap API**.
+This project uses the OpenWeatherMap API.
 
-Create a free account and generate your own API key.
-
-Replace
+1. Create a free account at https://openweathermap.org/
+2. Generate an API key.
+3. Open `js/api.js`.
+4. Replace
 
 ```javascript
 const API_KEY = "YOUR_API_KEY";
 ```
 
-with your own key.
-
----
+with your own API key.
 
 ##  What I Learned
 
@@ -112,16 +120,16 @@ Through this project I practiced:
 - Async / Await
 - DOM Manipulation
 - Event Handling
-- Modular JavaScript
+- Modular JavaScript architecture
 - Local Storage
-- Responsive Web Design
+- Responsive UI Design
 - CSS Grid & Flexbox
 - Error Handling
 - Git & GitHub workflow
 
 ---
 
-## 📈 Future Improvements
+##  Future Improvements
 
 - Hourly forecast
 - Air Quality Index (AQI)
@@ -131,7 +139,7 @@ Through this project I practiced:
 
 ---
 
-## 👩‍💻 Author
+##  Author
 
 **Tina Rai**
 
